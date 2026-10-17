@@ -1,0 +1,116 @@
+Flutter assets will be downloaded from https://storage.googleapis.com. Make sure you trust this source!
+Launching lib\main.dart on Windows in debug mode...
+Building Windows application...                                    26.8s
+√ Built build\windows\x64\runner\Debug\hvac_admin.exe
+[IMPORTANT:flutter/shell/platform/embedder/embedder_surface_gl_impeller.cc(126)] Using the Impeller rendering backend (OpenGLESSDF).
+[hvac-admin] info app.boot env=development supabase_configured=true supabase_host=zzmhomajzyqoibgqiymg.supabase.co
+supabase.supabase_flutter: INFO: ***** Supabase init completed ***** 
+Syncing files to device Windows...                                 198ms
+
+Flutter run key commands.
+r Hot reload. 
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+A Dart VM Service on Windows is available at: http://127.0.0.1:55327/gIHd0Tn0q4c=/
+The Flutter DevTools debugger and profiler on Windows is available at: http://127.0.0.1:55327/gIHd0Tn0q4c=/devtools/?uri=ws://127.0.0.1:55327/gIHd0Tn0q4c=/ws
+[hvac-admin] info realtime.subscribed audience=office
+supabase.auth: INFO: Signing out user with scope: local 
+[hvac-admin] info auth.session_expired
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] info realtime.stopped
+[hvac-admin] info realtime.subscribed audience=office
+[hvac-admin] info audit.recorded action=auth.login entity_type=session entity_id=0e1d3bc4-cc19-41ea-b6d2-f8f5b501714b
+AdminNotificationPreferencesRepository.load fallback: PostgrestException(message: Could not find the function public.get_my_notification_preferences without parameters in the schema cache, code: PGRST202, details: Searched for the function public.get_my_notification_preferences without parameters or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache., hint: null)
+[hvac-admin] warn realtime.channel_lost status=channelError attempt=0 error=RealtimeCloseEvent(code: 1006, reason: )
+[hvac-admin] warn realtime.channel_lost status=closed attempt=1
+[hvac-admin] warn realtime.channel_lost status=channelError attempt=2 error=WebSocketChannelException: SocketException: Failed host lookup: 'zzmhomajzyqoibgqiymg.supabase.co' (OS Error: No such host is known, errno = 11001)
+[hvac-admin] warn realtime.channel_lost status=closed attempt=3
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=1
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+[hvac-admin] warn realtime.channel_lost status=closed attempt=0
+Lost connection to device.

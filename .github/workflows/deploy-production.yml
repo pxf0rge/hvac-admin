@@ -1,0 +1,140 @@
+name: Deploy production
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_version:
+        description: 'pubspec version to deploy (e.g. 1.0.0+1)'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_NO_ANALYTICS: true
+
+jobs:
+  gate:
+    name: Version check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify pubspec version matches input
+        run: |
+          EXPECTED="${{ github.event.inputs.confirm_version }}"
+          ACTUAL=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "pubspec.yaml version is $ACTUAL but input was $EXPECTED."
+            exit 1
+          fi
+          echo "Deploying version $ACTUAL"
+
+  build-production:
+    name: Build production artifacts
+    runs-on: ubuntu-latest
+    needs: gate
+    environment: production
+    env:
+      HVAC_ENV: production
+      SUPABASE_URL: ${{ secrets.PRODUCTION_SUPABASE_URL }}
+      SUPABASE_PUBLISHABLE_KEY: ${{ secrets.PRODUCTION_SUPABASE_PUBLISHABLE_KEY }}
+      SUPABASE_PROJECT_REF: ${{ secrets.PRODUCTION_PROJECT_REF }}
+      STAGING_PROJECT_REF: ${{ secrets.STAGING_PROJECT_REF }}
+      PRODUCTION_PROJECT_REF: ${{ secrets.PRODUCTION_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require production Supabase secrets
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "PRODUCTION_SUPABASE_URL and PRODUCTION_SUPABASE_PUBLISHABLE_KEY are required."
+            exit 1
+          fi
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Build production web
+        run: |
+          flutter build web --no-tree-shake-icons \
+            --dart-define=HVAC_ENV=${{ env.HVAC_ENV }} \
+            --dart-define=SUPABASE_URL=${{ env.SUPABASE_URL }} \
+            --dart-define=SUPABASE_PUBLISHABLE_KEY=${{ env.SUPABASE_PUBLISHABLE_KEY }} \
+            --dart-define=SUPABASE_PROJECT_REF=${{ env.SUPABASE_PROJECT_REF }} \
+            --dart-define=STAGING_PROJECT_REF=${{ env.STAGING_PROJECT_REF }} \
+            --dart-define=PRODUCTION_PROJECT_REF=${{ env.PRODUCTION_PROJECT_REF }}
+      - name: Upload production web
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-production-${{ github.event.inputs.confirm_version }}
+          path: build/web/
+          retention-days: 90
+          if-no-files-found: error
+
+  build-windows-production:
+    name: Build Windows (production)
+    runs-on: windows-latest
+    needs: gate
+    environment: production
+    env:
+      HVAC_ENV: production
+      SUPABASE_URL: ${{ secrets.PRODUCTION_SUPABASE_URL }}
+      SUPABASE_PUBLISHABLE_KEY: ${{ secrets.PRODUCTION_SUPABASE_PUBLISHABLE_KEY }}
+      SUPABASE_PROJECT_REF: ${{ secrets.PRODUCTION_PROJECT_REF }}
+      STAGING_PROJECT_REF: ${{ secrets.STAGING_PROJECT_REF }}
+      PRODUCTION_PROJECT_REF: ${{ secrets.PRODUCTION_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require production Supabase secrets
+        shell: bash
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "PRODUCTION_SUPABASE_URL and PRODUCTION_SUPABASE_PUBLISHABLE_KEY are required."
+            exit 1
+          fi
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Build Windows release
+        run: |
+          flutter build windows --release `
+            --dart-define=HVAC_ENV=$env:HVAC_ENV `
+            --dart-define=SUPABASE_URL=$env:SUPABASE_URL `
+            --dart-define=SUPABASE_PUBLISHABLE_KEY=$env:SUPABASE_PUBLISHABLE_KEY `
+            --dart-define=SUPABASE_PROJECT_REF=$env:SUPABASE_PROJECT_REF `
+            --dart-define=STAGING_PROJECT_REF=$env:STAGING_PROJECT_REF `
+            --dart-define=PRODUCTION_PROJECT_REF=$env:PRODUCTION_PROJECT_REF
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-production-${{ github.event.inputs.confirm_version }}
+          path: build/windows/x64/runner/Release/
+          retention-days: 90
+          if-no-files-found: error
+
+  deploy-production-web:
+    name: Deploy production web
+    runs-on: ubuntu-latest
+    needs: build-production
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-production-${{ github.event.inputs.confirm_version }}
+          path: web-dist/
+      - name: Deploy via hook (optional)
+        env:
+          DEPLOY_HOOK: ${{ secrets.PRODUCTION_WEB_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "PRODUCTION_WEB_DEPLOY_HOOK not configured — download artifact and deploy manually."
+            exit 0
+          fi
+          curl -fsSL -X POST "$DEPLOY_HOOK"

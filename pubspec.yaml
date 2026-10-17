@@ -1,0 +1,48 @@
+name: hvac_admin
+description: HVAC Field Service Management — admin and office web/desktop app
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  go_router: ^14.6.2
+  intl: ^0.20.1
+  supabase_flutter: ^2.17.2
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
+  http: ^1.6.0
+  shared_preferences: ^2.5.5
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+# Regenerate launcher icons with:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "../icon.png"
+  android: true
+  # The admin app ships web + windows only; no iOS folder.
+  ios: false
+  web:
+    generate: true
+    image_path: "../icon.png"
+    background_color: "#0D1319"
+    theme_color: "#0D1319"
+  windows:
+    generate: true
+    image_path: "../icon.png"
+    icon_size: 256
